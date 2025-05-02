@@ -7,20 +7,18 @@ public class Login {
         ArrayList<Patient> patients = new ArrayList<Patient>();
         ArrayList<MedicalStaff> staff = new ArrayList<MedicalStaff>();
 
-        while(true){
-            BufferedReader patientReader = new BufferedReader(new FileReader(patientFile));
-            String line = patientReader.readLine();
-            while(line != null) {
-                String[] parts = line.split(",");
-                patients.add(new Patient(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4],parts[5]));
-                line = patientReader.readLine();
-            }
-            patientReader.close();
-            break;
+        BufferedReader patientReader = new BufferedReader(new FileReader(patientFile));
+        String line = patientReader.readLine();
+        
+        while(line != null) {
+            String[] parts = line.split(",");
+            patients.add(new Patient(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4],parts[5]));
+            line = patientReader.readLine();
         }
+        patientReader.close();
 
         BufferedReader staffReader = new BufferedReader(new FileReader(staffFile));
-        String line = staffReader.readLine();
+        line = staffReader.readLine();
         while(line != null) {
             String[] parts = line.split(",");
             staff.add(new MedicalStaff(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4],parts[5]));
