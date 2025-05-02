@@ -3,11 +3,37 @@ import java.util.*;
 public class Login {
     Scanner scnr = new Scanner(System.in);
 
+    public void loadData(String patientFile, String staffFile) throws IOException{
+        ArrayList<Patient> patients = new ArrayList<Patient>();
+        ArrayList<MedicalStaff> staff = new ArrayList<MedicalStaff>();
+
+        while(true){
+            BufferedReader patientReader = new BufferedReader(new FileReader(patientFile));
+            String line = patientReader.readLine();
+            while(line != null) {
+                String[] parts = line.split(",");
+                patients.add(new Patient(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4],parts[5]));
+                line = patientReader.readLine();
+            }
+            patientReader.close();
+            break;
+        }
+
+        BufferedReader staffReader = new BufferedReader(new FileReader(staffFile));
+        String line = staffReader.readLine();
+        while(line != null) {
+            String[] parts = line.split(",");
+            staff.add(new MedicalStaff(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4],parts[5]));
+            line = staffReader.readLine();
+        }
+        staffReader.close();
+    }
+
     public String choice() {
-        System.out.println("Signing in as a Patient or Medical Staff?");
-        String choice = scnr.next();
         String fileName = "";
         while(true) {
+            System.out.println("Signing in as a Patient or Medical Staff?");
+            String choice = scnr.next();
             if(choice.equalsIgnoreCase("Patient")){
                 fileName = "dataset/patient.csv";
                 break;
@@ -23,22 +49,6 @@ public class Login {
         return fileName;
     }
 
-    public void loadData(String filename, String filename2) throws IOException{
-        ArrayList<Patient> patients = new ArrayList<Patient>();
-        ArrayList<MedicalStaff> staff = new ArrayList<MedicalStaff>();
-
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(filename));
-            String line = reader.readLine();
-            while(line != null) {
-
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-    }
 }
 
 

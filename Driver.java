@@ -2,8 +2,8 @@ import java.io.*;
 import java.util.*;
 public class Driver {
     public static void main(String[] args) {
-        Login login = new Login();
-        login.loadData(login.choice());
+        Login login = new Login(); //create manager
+        login.loadData("/datasets/patient.csv","/datasets/medicalstaff.csv"); //load both files
 
     }
 }
