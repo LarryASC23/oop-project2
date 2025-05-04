@@ -13,6 +13,14 @@ public abstract class User {
         this.email = email;
     }
 
+    public String getUsername(){
+        return username;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
     public String toString() {
         return "Id: " + id + "\nUsername: " + username + "\nPassword: " + password + "\nName: " + name + "\nEmail: " + email;
     }

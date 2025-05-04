@@ -5,8 +5,7 @@ public class Driver {
         String patientFile = "/datasets/patient.csv";
         String staffFile = "/datasets/medicalstaff.csv";
         Login login = new Login(); //create manager
-        login.loadData(patientFile,staffFile);
-        login.choice(); //load both files
+        login.loginCheck(patientFile,staffFile); //login 
 
     }
 }

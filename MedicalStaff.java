@@ -5,7 +5,7 @@ public class MedicalStaff extends User{
         super(id, username, password, name, email);
         this.department = department;
     }
-    
+
     @Override
     public String toString() {
         return "Id: " + id + "\nUsername: " + username + "\nPassword: " + password + "\nName: " + name + "\nEmail: " + email + "\nDepartment: " + department;

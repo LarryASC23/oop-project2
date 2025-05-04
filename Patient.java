@@ -5,7 +5,7 @@ public class Patient extends User{
         super(id, username, password, name, email);
         this.treatment_notes = treatment_notes;
     }
-    
+
     @Override
     public String toString() {
         return "Id: " + id + "\nUsername: " + username + "\nPassword: " + password + "\nName: " + name + "\nEmail: " + email + "\nTreatment Notes: " + treatment_notes;
