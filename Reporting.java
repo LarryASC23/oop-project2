@@ -68,5 +68,6 @@ public class Reporting {
         System.out.println("Successfully finished writing to " + fileName);
         fileWriter.close();
         printWriter.close();
+        scnr.close();
     }
 }
