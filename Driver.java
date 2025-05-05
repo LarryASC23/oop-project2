@@ -3,8 +3,8 @@ import java.util.*;
 public class Driver {
     public static void main(String[] args) throws IOException {
         Scanner scnr = new Scanner(System.in);
-        String patientFile = "/datasets/patient.csv";
-        String staffFile = "/datasets/medicalstaff.csv";
+        String patientFile = "datasets/patient.csv";
+        String staffFile = "datasets/medicalstaff.csv";
 
         Login login = new Login(); //login 
         User loggedUser = login.loginCheck(patientFile,staffFile);
