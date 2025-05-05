@@ -60,31 +60,6 @@ public class Login {
             }
         }
     }
-
-    public void userLogin() {
-
-    }
-
-    // public String choice() {
-    //     String fileCheck = "";
-    //     while(true) {
-    //         System.out.println("Signing in as a Patient or Medical Staff? (Type \"Patient\" or \"Medical Staff\")");
-    //         String choice = scnr.next();
-    //         if(choice.equalsIgnoreCase("Patient")){
-    //             fileCheck = "patient";
-    //             break;
-    //         }
-    //         else if(choice.equalsIgnoreCase("Medical Staff")){
-    //             fileCheck = "staff";
-    //             break;
-    //         }
-    //         else {
-    //             System.out.println("Invalid choice. Please try again.");
-    //         }
-    //     }
-    //     return fileCheck;
-    // }
-
 }
 
 

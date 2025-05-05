@@ -4,9 +4,27 @@ public class Driver {
     public static void main(String[] args) {
         String patientFile = "/datasets/patient.csv";
         String staffFile = "/datasets/medicalstaff.csv";
-        Login login = new Login(); //create manager
-        login.loginCheck(patientFile,staffFile); //login 
 
+        Login login = new Login(); //login 
+        User loggedUser = login.loginCheck(patientFile,staffFile);
+
+        ArrayList<Patient> patientArrayList =  new ArrayList<>(); //patient list to be stored in manager
+        PatientManager manager = new PatientManager(loggedUser, patientArrayList, patientFile);
+
+    }
+
+    public ArrayList<Patient> patientArray(String patientFile) throws IOException{
+        ArrayList<Patient> patientArrayList = new ArrayList<>();
+        BufferedReader patientReader = new BufferedReader(new FileReader(patientFile));
+        String line = patientReader.readLine();
+        
+        while(line != null) {
+            String[] parts = line.split(",");
+            patientArrayList.add(new Patient(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4],parts[5]));
+            line = patientReader.readLine();
+        }
+        patientReader.close();
+        return patientArrayList;
     }
 }
 

@@ -1,6 +1,34 @@
 import java.io.*;
+import java.util.*;
 public class PatientManager {
+    private User loggedUser;
+    private ArrayList<Patient> patientArrayList;
+    private String patientFileName;
 
+    public PatientManager(User loggedUser, ArrayList<Patient> patientArrayList, String patientFileName){
+        this.loggedUser = loggedUser;
+        this.patientArrayList = patientArrayList;
+        this.patientFileName = patientFileName;
+    }
+
+    public void viewProfile(){
+        loggedUser.toString();
+    }
+
+
+    public Patient patientSearch(int id){
+        Patient foundPatient;
+
+        if(loggedUser instanceof MedicalStaff){
+
+        }
+
+        return foundPatient;
+    }
+
+    public void patientEdit(Patient curPatient){
+
+    }
 }
 
 /*
