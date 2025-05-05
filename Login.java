@@ -62,16 +62,3 @@ public class Login {
         return null;
     }
 }
-
-
-/*
-When the program starts:
-
-Ask the user for their username and password.
-
-Check if they exist in a patients file OR a medical staff file.
-
-If found → create the correct object (Patient or MedicalStaff) and move on.
-
-If not → tell them the login failed and ask again.
- */

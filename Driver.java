@@ -21,7 +21,7 @@ public class Driver {
             if(loggedUser instanceof MedicalStaff){
                 System.out.println("2. Patient Lookup by ID");
                 System.out.println("3. Edit Patient Information");
-                System.out.println("4. Generate ")
+                System.out.println("4. Generate Report");
             }
             else{
                 System.out.println("2. Edit my information");
@@ -49,12 +49,21 @@ public class Driver {
             }
             else if (action == 2 && loggedUser instanceof Patient){
                 // edit patients own stuff
+                manager.patientEdit((Patient)loggedUser);
             }
             else if (action == 3 && loggedUser instanceof MedicalStaff){
                 // edit select patient info 
+                System.out.println("Enter the ID of the patient you would like to edit");
+                int id = scnr.nextInt();
+                Patient editPatient = manager.patientBinarySearch(id);
+                manager.patientEdit(editPatient);
+            }
+            else if (action == 4 && loggedUser instanceof MedicalStaff){
+                Reporting.generateReport(patientArrayList, loggedUser);
             }
 
         }
+        scnr.close();
     }
 
     public static ArrayList<Patient> patientArrayMaker(String patientFile) throws IOException{
@@ -86,24 +95,3 @@ public class Driver {
     }
 
 }
-
-/*
-You are being asked to:
-
-Create a class hierarchy (User, Patient, MedicalStaff).
-
-Implement file reading (for login and loading patients).
-
-Implement basic login authentication.
-
-Allow viewing and editing of patient profiles.
-
-Implement sorting and binary search (YOU must write the sorting and searching yourself, no Java Collections sort() or anything automatic!).
-
-Save changes back to the file when editing happens.
-
-Allow report generation.
-
-Driver (main method) to glue everything together and handle menus.
-
- */

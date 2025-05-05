@@ -46,40 +46,49 @@ public class PatientManager {
         return null;
     }
 
-    public void patientEdit(Patient curPatient){
+    public void patientEdit(Patient curPatient) throws IOException{
         Scanner scnr = new Scanner(System.in);
-        System.out.println("What would you like to edit?");
-        System.out.println("Options include: password, name, email, and treatment notes");
-        String choice = scnr.next();
+        while(true){
+            System.out.println("What would you like to edit?");
+            System.out.println("Options include: password, name, email, treatment notes.");
+            System.out.println("Once you are done editing, type \"exit\"");
+            String choice = scnr.nextLine();
 
-        System.out.println("")
-        
+            System.out.println("What would you like to change that to?");
+            String value = scnr.nextLine();
+            
+            if (choice.equalsIgnoreCase("password")) {
+                curPatient.password = value;
+            } 
+            else if (choice.equalsIgnoreCase("name")) {
+                curPatient.name = value;
+            } 
+            else if (choice.equalsIgnoreCase("email")) {
+                curPatient.email = value;
+            } 
+            else if (choice.equalsIgnoreCase("treatment_notes")) {
+                curPatient.setTreatmentNotes(value);
+            }
+            else if (choice.equalsIgnoreCase("exit")) {
+                break;
+            }
+        }
+
         scnr.close();
+
+        // write all patients to file (thus should include edited patient)
+        System.out.println("Writing to file...");
+        FileWriter fileWriter = new FileWriter(patientFileName);
+        PrintWriter printWriter = new PrintWriter(fileWriter);
+
+        for (int i = 0; i < patientArrayList.size(); i++) {
+            Patient p = patientArrayList.get(i);
+            printWriter.println(p.getID() + "," + p.getUsername() + "," + p.getPassword() + "," + p.getName() + "," + p.getEmail() + "," + p.getTreatmentNotes());
+        }
+    
+        printWriter.close();
+        fileWriter.close();
+        System.out.println("Successfully wrote to file.");
+        
     }
 }
-
-/*
-After successful login, create a PatientManager object.
-
-What PatientManager stores:
-
-The current user (who logged in).
-
-An ArrayList of all Patients (load from the patients file).
-
-What PatientManager can do:
-
-View current user’s profile.
-
-If Medical Staff:
-
-Search for a Patient by id (Binary Search) and view their profile.
-
-Edit a Patient’s profile (except id and username).
-
-Save all changes back to the file.
-
-If Patient:
-
-Only view and edit their own profile.
-*/
