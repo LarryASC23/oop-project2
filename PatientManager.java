@@ -12,22 +12,49 @@ public class PatientManager {
     }
 
     public void viewProfile(){
-        loggedUser.toString();
+        System.out.println(loggedUser.toString());
     }
 
 
-    public Patient patientSearch(int id){
-        Patient foundPatient;
+    public Patient patientBinarySearch(int id){ //binary sort 
 
         if(loggedUser instanceof MedicalStaff){
+            int start = 0;
+            int end = patientArrayList.size() - 1;
 
+            while(start<=end){
+                int mid = start + (end-start) / 2;
+                int patientMidVal = patientArrayList.get(mid).getID();
+
+                if (id < patientMidVal){
+                    end = mid - 1;
+                }
+                else if (id > patientMidVal){
+                    start = mid + 1;
+                }
+                else{
+                    Patient sortPatient = patientArrayList.get(mid);
+                    return sortPatient;
+                }
+            }
         }
 
-        return foundPatient;
+        else{
+            System.out.println("Only medical staff can search for patients, sorry.");
+            return null;
+        }
+        return null;
     }
 
     public void patientEdit(Patient curPatient){
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("What would you like to edit?");
+        System.out.println("Options include: password, name, email, and treatment notes");
+        String choice = scnr.next();
 
+        System.out.println("")
+        
+        scnr.close();
     }
 }
 

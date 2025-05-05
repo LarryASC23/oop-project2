@@ -1,7 +1,8 @@
 import java.io.*;
 import java.util.*;
 public class Driver {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        Scanner scnr = new Scanner(System.in);
         String patientFile = "/datasets/patient.csv";
         String staffFile = "/datasets/medicalstaff.csv";
 
@@ -9,11 +10,55 @@ public class Driver {
         User loggedUser = login.loginCheck(patientFile,staffFile);
 
         ArrayList<Patient> patientArrayList =  new ArrayList<>(); //patient list to be stored in manager
+        patientArrayList = patientArrayMaker(patientFile);
+
         PatientManager manager = new PatientManager(loggedUser, patientArrayList, patientFile);
 
+        while(true){
+            System.out.println("What would you like to do (only enter corresponding integer)");
+            System.out.println("0. Exit");
+            System.out.println("1. View Profile");
+            if(loggedUser instanceof MedicalStaff){
+                System.out.println("2. Patient Lookup by ID");
+                System.out.println("3. Edit Patient Information");
+                System.out.println("4. Generate ")
+            }
+            else{
+                System.out.println("2. Edit my information");
+            }
+
+            int action = scnr.nextInt();
+
+            if(action == 0){
+                break;
+            }
+            else if(action == 1){
+                manager.viewProfile();
+            }
+            else if (action == 2 && loggedUser instanceof MedicalStaff){
+                // patient lookup
+                System.out.println("Enter the ID of the patient you are looking for.");
+                int idToFind = scnr.nextInt();
+                Patient binaryPatient = manager.patientBinarySearch(idToFind);
+                if(binaryPatient == null){
+                    System.out.println("No patient found");
+                }
+                else{
+                    System.out.println(binaryPatient);
+                }
+            }
+            else if (action == 2 && loggedUser instanceof Patient){
+                // edit patients own stuff
+            }
+            else if (action == 3 && loggedUser instanceof MedicalStaff){
+                // edit select patient info 
+            }
+
+        }
     }
 
-    public ArrayList<Patient> patientArray(String patientFile) throws IOException{
+    public static ArrayList<Patient> patientArrayMaker(String patientFile) throws IOException{
+        // attaching file to arraylist (basically)
         ArrayList<Patient> patientArrayList = new ArrayList<>();
         BufferedReader patientReader = new BufferedReader(new FileReader(patientFile));
         String line = patientReader.readLine();
@@ -24,8 +69,22 @@ public class Driver {
             line = patientReader.readLine();
         }
         patientReader.close();
+
+        // sorting arraylist using bubble sort
+
+        for(int i = 0; i < patientArrayList.size() - 1; i++){
+            for(int j = 0; j < patientArrayList.size() - 1; j++){
+                if(patientArrayList.get(j).getID() > patientArrayList.get(j + 1).getID()){
+                    Patient temp = patientArrayList.get(j);
+                    patientArrayList.set(j, patientArrayList.get(j + 1));
+                    patientArrayList.set(j + 1, temp);
+                }
+            }
+        }
+
         return patientArrayList;
     }
+
 }
 
 /*
